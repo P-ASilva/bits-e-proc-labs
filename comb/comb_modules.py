@@ -18,7 +18,7 @@ def exe1(q, a, b):
 
     @always_comb
     def comb():
-        q.next = a
+        q.next = a or (not b)
 
     return instances()
 
@@ -42,9 +42,22 @@ def exe2(q, a, b, c):
     Não utilize IF!
     """
 
+    '''
+
+    /a . /b . /c  + /a . b . c + a . /b . /c + a . b . c 
+
+    /a * (/b*/c + b*c) + a * (/b*/c + b*c)
+
+    (/a + a) * (/b*/c + b*c)
+
+    (/b*/c + b*c)
+    
+    
+
+    '''
     @always_comb
     def comb():
-        q.next = a
+        q.next = not(b or c) or (b and c)
 
     return instances()
 
@@ -68,17 +81,18 @@ def exe3(q, a, b, c, d, e):
                                     -|  \
                                     |   )-----
     e--------------------------------|__/
+
     """
 
     @always_comb
     def comb():
-        q.next = a
+        q.next = (((a or b) and c) and d) and e
 
     return instances()
 
 
 @block
-def exe4(led, sw):
+def exe4(led, sw): # to do
     @always_comb
     def comb():
         led[0].next = sw[0] and (not sw[1])
@@ -98,7 +112,12 @@ def exe5(leds, sw):
 
     @always_comb
     def comb():
-        pass
+        led[0].next = sw[0]
+        led[1].next = sw[0] and sw[1]
+        led[2].next = not(led[1])
+        led[3].next = (sw[0] != sw[1])
+        for l in range(4,8)
+            led[l] = True
 
     return instances()
 
