@@ -112,12 +112,12 @@ def exe5(leds, sw):
 
     @always_comb
     def comb():
-        led[0].next = sw[0]
-        led[1].next = sw[0] and sw[1]
-        led[2].next = not(led[1])
-        led[3].next = (sw[0] != sw[1])
-        for l in range(4,8)
-            led[l] = True
+        leds[0].next = sw[0]
+        leds[1].next = sw[0] and sw[1]
+        leds[2].next = not(leds[1])
+        leds[3].next = (sw[0] != sw[1])
+        for l in range(4,8):
+            leds[l] = True
 
     return instances()
 
@@ -127,12 +127,13 @@ def sw2hex(hex0, sw):
     @always_comb
     def comb():
         pass
-
     return instances()
 
 
 @block
 def bin2hex(hex0, sw):
+    print(sw)
+    print(hex0)
     @always_comb
     def comb():
         if sw[4:0] == 0:
