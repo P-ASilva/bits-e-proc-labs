@@ -33,24 +33,23 @@ def toplevel(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, CLOCK_50, RESET_
     # seq
     # ---------------------------------------- #
     # ic0 = dff(ledr_s[0], sw_s[0], key_s[0], RESET_N)
-    # ic1 = blinkLed(ledr_s[0], 100, CLOCK_50, RESET_N)
-    # ic2 = blinkLed(ledr_s[1], 50, CLOCK_50, RESET_N)
-    # ic3 = blinkLed(ledr_s[2], 1000, CLOCK_50, RESET_N)
-    # ic1 = stepMotor(LEDR, sw_s[0], sw_s[1], CLOCK_50, RESET_N)
 
+    # ----- Comentar o always_comb ------------#
+    # ic1 = contador(LEDR, key_s[0], RESET_N)
+
+    # ----- Usar o always_comb ----------------#
+    # ic2 = blinkLed(ledr_s[0], CLOCK_50, RESET_N)
+    # ic3 = blinkLed(ledr_s[1], 50, CLOCK_50, RESET_N)
+    # ic4 = blinkLed(ledr_s[2], 1000, CLOCK_50, RESET_N)
+
+    # ----- Comentar o always_comb ------------#
+    # ic5 = barLed(LEDR, CLOCK_50, RESET_N)
+    # ic6 = barLed2(LEDR, CLOCK_50, RESET_N)
     # ---------------------------------------- #
     @always_comb
     def comb():
         for i in range(len(ledr_s)):
             LEDR[i].next = ledr_s[i]
-
-    #        for i in range(len(hex0_s)):
-    #            HEX0[i].next = hex0_s[i]
-    #            HEX1[i].next = hex1_s[i]
-    #            HEX2[i].next = hex2_s[i]
-    #            HEX3[i].next = hex3_s[i]
-    #            HEX4[i].next = hex4_s[i]
-    #            HEX5[i].next = hex5_s[i]
 
     return instances()
 
